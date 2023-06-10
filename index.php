@@ -120,21 +120,21 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
           <div class="row">
             <div class="col">
               <label for="name">Nombre:</label>
-              <input type="text" class="form-control" placeholder="nombre" name="nombre" />
+              <input type="text" id="name" class="form-control" placeholder="nombre" name="nombre" />
             </div>
             <div class="col">
               <label for="surname">Apellido:</label>
-              <input type="text" class="form-control" placeholder="apellido" name="surname" />
+              <input type="text" id="surname" class="form-control" placeholder="apellido" name="surname" />
             </div>
           </div>
         </div>
         <div class="form-group">
           <label for="age">Edad:</label>
-          <input type="date" class="form-control" name="age" min="1900-01-01" max="2023-12-31" />
+          <input type="date" id="age" class="form-control" name="age" min="1900-01-01" max="2023-12-31" />
         </div>
         <div class="form-group">
           <label for="civilStatus">Estado civil:</label>
-          <select name="civilStatus" class="form-select" aria-label="Default select example">
+          <select name="civilStatus" id="civilStatus" class="form-select" aria-label="Default select example">
             <option value="single">Soltero(a)</option>
             <option value="married">Casado(a)</option>
             <option value="wid">Viudo(a)</option>
@@ -143,23 +143,23 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
 
         <div class="form-group">
           <label for="income">Sueldo:</label>
-          <select name="income" class="form-select" aria-label="Default select example">
+          <select name="income" id="income" class="form-select" aria-label="Default select example">
             <option value="lessThan1000">Menos de 1000</option>
             <option value="between1000and2500">Entre 1000 y 2500</option>
             <option value="moreThan2500">Más de 2500</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="sex">Sexo:</label> <br>
+          <p>Sexo</p>
 
           <div class="form-check">
-            <input type="radio" class="form-check-input" value="female" name="sex" />
+            <input type="radio" class="form-check-input" id="female" value="female" name="sex" />
             <label class="form-check-label" for="female">Femenino</label><br />
 
-            <input type="radio" class="form-check-input" value="male" name="sex" />
+            <input type="radio" class="form-check-input" id="male" value="male" name="sex" />
             <label class="form-check-label" for="male">Masculino</label><br />
 
-            <input type="radio" class="form-check-input" value="other" name="sex" />
+            <input type="radio" class="form-check-input" id="other" value="other" name="sex" />
             <label class="form-check-label" for="other">Otro</label><br />
           </div>
         </div>
