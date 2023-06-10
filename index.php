@@ -103,7 +103,7 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
     <h1>Registro de empleados</h1>
     <div>
       <h4>Ingrese sus datos de empleado:</h4>
-      <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+      <form action="index.php" method="post">
         <div class="form-group">
           <div class="row">
             <div class="col">
@@ -212,7 +212,7 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
               $amountMalesMarried2500 = 0;
               $amountWidows1000 = 0;
               $amountMales = 0;
-              $averageAgeMale = 0;
+              $summAgeMale = 0;
               foreach ($arrayEmployees as $employee) {
                 if ($employee->getSex() == "Femenino") {
                   $amountFemale += 1;
@@ -225,7 +225,7 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
                 }
                 if ($employee->getSex() == "Masculino") {
                   $amountMales += 1;
-                  $averageAgeMale += $employee->getAge();
+                  $summAgeMale += $employee->getAge();
                 }
               }
 
@@ -234,11 +234,12 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
               echo "<td>", $amountWidows1000, "</td>";
               echo "<td>";
               try {
-                echo $averageAgeMale / $amountMales;
-              } catch (DivisionByZeroError) {
+                echo $averageAgeMale = intval($summAgeMale/$amountMales);
+              }catch(DivisionByZeroError){
                 echo "0";
               }
               echo "</td>";
+
               ?>
             </tr>
           </tbody>
