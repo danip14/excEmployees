@@ -204,7 +204,6 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
       </table>
     </div>
   </div>
-  <script src="js/index.js"></script>
   <!--Boostrap-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
