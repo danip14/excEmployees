@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Caracas');
 session_start();
 $arrayEmployees = [];
 $arrayAux = [];
@@ -65,23 +64,12 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
     $income = $_POST['income'];
     $sex = $_POST['sex'];
 
-    $fecha = date('d-m-Y');
+    date_default_timezone_set('America/Caracas');
+    $date = date('d-m-Y');
     $birthdate = $_POST['age'];
 
-    $exactBirthdate = strtotime($fecha) - strtotime($birthdate);
-    $ageTest = intval($exactBirthdate / 60 / 60 / 24 / 365.25);
-
-    if ($ageTest < 0) {
-      echo "datos invalidos";
-      $age = null;
-    }
-    if ($ageTest < 18 && $edad >= 0) {
-      echo "Usted es menor de edad, no es posible almacenar datos";
-      $age = null;
-    }
-    if ($ageTest >= 18) {
-      $age = $ageTest;
-    }
+    $exactBirthdate = strtotime($date) - strtotime($birthdate);
+    $age = intval($exactBirthdate / 60 / 60 / 24 / 365.25);
 
     $arrayAux = new employee($name, $surname, $age, $civilStatus, $income, $sex);
     array_push($arrayEmployees, $arrayAux);
@@ -119,62 +107,61 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
         <div class="form-group">
           <div class="row">
             <div class="col">
-              <label for="name">Nombre:</label>
-              <input type="text" id="name" class="form-control" placeholder="nombre" name="nombre" />
+              <label for="nameid">Nombre:</label>
+              <input type="text" id="nameid" class="form-control" placeholder="nombre" name="name" />
             </div>
             <div class="col">
-              <label for="surname">Apellido:</label>
-              <input type="text" id="surname" class="form-control" placeholder="apellido" name="surname" />
+              <label for="surnameid">Apellido:</label>
+              <input type="text" id="surnameid" class="form-control" placeholder="apellido" name="surname" />
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label for="age">Edad:</label>
-          <input type="date" id="age" class="form-control" name="age" min="1900-01-01" max="2023-12-31" />
+          <label for="ageid">Edad:</label>
+          <input type="date" id="ageid" class="form-control" name="age" min="1900-01-01" max="2004-12-31" />
         </div>
         <div class="form-group">
-          <label for="civilStatus">Estado civil:</label>
-          <select name="civilStatus" id="civilStatus" class="form-select" aria-label="Default select example">
-            <option value="single">Soltero(a)</option>
-            <option value="married">Casado(a)</option>
-            <option value="wid">Viudo(a)</option>
+          <label for="civilStatusid">Estado civil:</label>
+          <select name="civilStatus" id="civilStatusid" class="form-select" aria-label="Default select example">
+            <option value="Soltero(a)">Soltero(a)</option>
+            <option value="Casado(a)">Casado(a)</option>
+            <option value="Viudo(a)">Viudo(a)</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="income">Sueldo:</label>
-          <select name="income" id="income" class="form-select" aria-label="Default select example">
-            <option value="lessThan1000">Menos de 1000</option>
-            <option value="between1000and2500">Entre 1000 y 2500</option>
-            <option value="moreThan2500">Más de 2500</option>
+          <label for="incomeid">Sueldo:</label>
+          <select name="income" id="incomeid" class="form-select" aria-label="Default select example">
+            <option value="Menos de 1000">Menos de 1000</option>
+            <option value="entre 1000 y 2500">Entre 1000 y 2500</option>
+            <option value="mas de 2500">Más de 2500</option>
           </select>
         </div>
         <div class="form-group">
           <p>Sexo</p>
-
           <div class="form-check">
-            <input type="radio" class="form-check-input" id="female" value="female" name="sex" />
-            <label class="form-check-label" for="female">Femenino</label><br />
+            <input type="radio" class="form-check-input" id="femaleid" value="Femenino" name="sex" />
+            <label class="form-check-label" for="femaleid">Femenino</label><br />
 
-            <input type="radio" class="form-check-input" id="male" value="male" name="sex" />
-            <label class="form-check-label" for="male">Masculino</label><br />
+            <input type="radio" class="form-check-input" id="maleid" value="Masculino" name="sex" />
+            <label class="form-check-label" for="maleid">Masculino</label><br />
 
-            <input type="radio" class="form-check-input" id="other" value="other" name="sex" />
-            <label class="form-check-label" for="other">Otro</label><br />
+            <input type="radio" class="form-check-input" id="otherid" value="Otro" name="sex" />
+            <label class="form-check-label" for="otherid">Otro</label><br />
           </div>
         </div>
-        
-          <button type="submit" class="btn btn-primary" name="register">
-            Registrar
-          </button>
-          <button type="submit" class="btn btn-danger" name="delete">
-            Eliminar registros
-          </button>
+
+        <button type="submit" class="btn btn-primary" name="register">
+          Registrar
+        </button>
+        <button type="submit" class="btn btn-danger" name="delete">
+          Eliminar registros
+        </button>
 
       </form>
     </div>
     <div class="tabla">
-      <h4>Lista de empleados</h4>
+      <h4>Lista de empleados: </h4>
       <table class="table">
         <thead>
           <tr>
@@ -197,11 +184,66 @@ if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['age'])) 
             echo "<td>", $employee->getIncome(), "</td>";
             echo "<td>", $employee->getSex(), "</td>";
             echo "</tr>";
+
           }
 
           ?>
         </tbody>
       </table>
+    </div>
+    <div>
+      <h4>
+        Datos determinados:
+      </h4>
+      <div class="tabla">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Total de femeninas</th>
+              <th scope="col">Masculinos casados que ganan más de 2500</th>
+              <th scope="col">Femeninas viudas que ganan mas de 1000</th>
+              <th scope="col">Edad promedio de Masculinos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <?php
+              $amountFemale = 0;
+              $amountMalesMarried2500 = 0;
+              $amountWidows1000 = 0;
+              $amountMales = 0;
+              $averageAgeMale = 0;
+              foreach ($arrayEmployees as $employee) {
+                if ($employee->getSex() == "Femenino") {
+                  $amountFemale += 1;
+                }
+                if ($employee->getCivilStatus() == "Casado(a)" && $employee->getIncome() == "mas de 2500") {
+                  $amountMalesMarried2500 += 1;
+                }
+                if ($employee->getCivilStatus() == "Viudo(a)" && $employee->getSex() == "Femenino" && ($employee->getIncome() == "entre 1000 y 2500" || $employee->getIncome() == "mas de 2500")) {
+                  $amountWidows1000 += 1;
+                }
+                if ($employee->getSex() == "Masculino") {
+                  $amountMales += 1;
+                  $averageAgeMale += $employee->getAge();
+                }
+              }
+
+              echo "<td>", $amountFemale, "</td>";
+              echo "<td>", $amountMalesMarried2500, "</td>";
+              echo "<td>", $amountWidows1000, "</td>";
+              echo "<td>";
+              try {
+                echo $averageAgeMale / $amountMales;
+              } catch (DivisionByZeroError) {
+                echo "0";
+              }
+              echo "</td>";
+              ?>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <!--Boostrap-->
